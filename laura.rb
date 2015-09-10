@@ -17,12 +17,12 @@ module Laura
     :escape_chars
   )
   
-  class Bot
-    attr_reader :connection, :bot, :config, :plugins
+  class Bot < Imouto::Bot
+    attr_reader :config, :plugins
   
     def initialize
-      @connection = Imouto::Irc.new(Laura::Config::Connection, Laura::Config::User)
-      @bot = Imouto::Bot.new(@connection)
+      con = Imouto::Irc.new(Laura::Config::Connection, Laura::Config::User)
+      super(con)
       @config = BotConfig.new()
       Laura::Config::Laura.each {|k, v| @config[k] = v;}
       @plugins = Hash.new
@@ -55,7 +55,7 @@ module Laura
   
     def register_plugin(name)
       load("plugins/#{name}.rb")
-      plugin = Laura.const_get(name).new()
+      plugin = Laura.const_get(name).new(self)
       plugin.matchers.each {|m| register_matcher(m)}
       @plugins[name] = plugin
     end
@@ -85,15 +85,11 @@ module Laura
         @config.escape_chars.each{|s| if reply.start_with?(s) then reply.prepend('\'') end}
         reply
       }
-      @bot.register_matcher(make_matcher_regex(matcher), proc)
+      super(make_matcher_regex(matcher), proc)
     end
     
     def unregister_matcher(matcher)
-      @bot.unregister_matcher(make_matcher_regex(matcher))
-    end
-    
-    def start
-      @bot.start
+      super(make_matcher_regex(matcher))
     end
     
     end
