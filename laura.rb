@@ -81,7 +81,7 @@ module Laura
     def register_matcher(matcher)
       proc = lambda {|msg|
         if matcher.is_restricted == true && msg.raw[:nick]+"!"+msg.raw[:mask] != @config.master then return end
-        reply = matcher.proc.call(msg)
+        reply = matcher.proc.call(msg) || ""
         @config.escape_chars.each{|s| if reply.start_with?(s) then reply.prepend('\'') end}
         reply
       }
