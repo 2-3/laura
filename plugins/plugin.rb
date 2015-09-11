@@ -3,10 +3,10 @@ require_relative "plugin"
 module Laura
 
   class Plugin
-	
-		def initialize(bot)
-			@bot = bot
-		end
+  
+    def initialize(bot)
+      @bot = bot
+    end
 
     def matchers
       {}

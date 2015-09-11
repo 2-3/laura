@@ -13,6 +13,11 @@ module Laura
       'realname' => 'laurabot',
       'password' => '',
     }
+		Imouto = {
+			'message_interval_size' => 4,
+			'messages_per_interval' => 3,
+			'loggers' => [lambda {|msg| p msg}]	
+		}
     Laura = {
       'master' => 'zwdr!~lain@zwdr.euirc.net',
       'prefix' => '\+',

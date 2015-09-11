@@ -22,7 +22,7 @@ module Laura
   
     def initialize
       con = Imouto::Irc.new(Laura::Config::Connection, Laura::Config::User)
-      super(con)
+      super(con, Laura::Config::Imouto)
       @config = BotConfig.new()
       Laura::Config::Laura.each {|k, v| @config[k] = v;}
       @plugins = Hash.new
