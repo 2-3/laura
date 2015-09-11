@@ -31,7 +31,7 @@ module Laura
           'is_restricted' => true
         }),
         match({
-          'match' => /kick (?<user>.*) (?<reason>.*)/,
+          'match' => /kick (?<user>\S*) (?<reason>.*)/,
           'proc' => lambda {|msg| @bot.irc.kick(msg[:target], msg.captures[:user], msg.captures[:reason])},
           'is_restricted' => true
         })
