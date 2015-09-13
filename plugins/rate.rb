@@ -1,4 +1,4 @@
-require_relative "plugin"
+require_relative "Plugin"
 
 module Laura
   class Rate < Plugin

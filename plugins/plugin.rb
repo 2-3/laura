@@ -1,5 +1,3 @@
-require_relative "plugin"
-
 module Laura
 
   class Plugin
