@@ -21,7 +21,7 @@ module Laura
     Laura = {
       'master' => 'zwdr!~lain@zwdr.euirc.net',
       'prefix' => '\+',
-      'plugins' => ['Echo', 'Rate', 'Admin'],
+      'plugins' => ['Echo', 'Rate', 'Admin', 'Poll'],
       'escape_chars' => ['!', ',', '+']
     }
   end

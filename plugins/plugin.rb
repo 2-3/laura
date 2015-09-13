@@ -3,6 +3,7 @@ require_relative "plugin"
 module Laura
 
   class Plugin
+    attr_reader :bot
   
     def initialize(bot)
       @bot = bot
