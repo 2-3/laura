@@ -27,27 +27,21 @@ module Laura
       @plugins = {}
       @config.plugins.each { |p| register_plugin(p) }
       [Matcher.new(
-        /reload-plugin (?<name>.*)/,
-        true,
-        true,
+        /reload-plugin (?<name>.*)/, true, true,
         ->(msg) {
           reload_plugin(msg.captures[:name])
           return "reloaded #{msg.captures[:name]}!"
         }
       ),
       Matcher.new(
-        /register-plugin (?<name>.*)/,
-        true,
-        true,
+        /register-plugin (?<name>.*)/, true, true,
         ->(msg) {
           register_plugin(msg.captures[:name])
           return "registered #{msg.captures[:name]}!"
         }
       ),
       Matcher.new(
-        /unregister-plugin (?<name>.*)/,
-        true,
-        true,
+        /unregister-plugin (?<name>.*)/, true, true,
         ->(msg) {
           unregister_plugin(msg.captures[:name])
           return "unregistered #{msg.captures[:name]}!"
@@ -75,8 +69,8 @@ module Laura
 
     def make_matcher_regex(matcher)
       match = matcher.match
-      matcher.use_prefix && match = Regexp.new(@config.prefix.to_s + match.to_s)
-      match
+      matcher.use_prefix && match = @config.prefix.to_s + match.to_s
+      Regexp.new( "^" + match )
     end
 
     def register_matcher(matcher)
